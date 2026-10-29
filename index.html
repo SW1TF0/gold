@@ -37,9 +37,7 @@
 </head>
 <body>
   <!-- Live ticker strip -->
-  <div class="ticker" aria-label="Live prices">
-    <div class="ticker__track" id="tickerTrack"></div>
-  </div>
+  <div class="ticker" id="tvTicker" aria-label="Live prices"></div>
 
   <header class="header" id="header">
     <div class="container header__inner">
@@ -94,8 +92,9 @@
         <div class="hero__quotes">
           <article class="quote quote--gold" data-metal="XAU">
             <header><span class="quote__sym">XAU</span><span class="quote__name" data-i18n="metal.gold">Злато</span><span class="pill pill--live" data-status><i></i><b data-i18n="status.loading">Зареждане…</b></span></header>
-            <div class="quote__price" data-field="ozEUR">—</div>
-            <div class="quote__unit"><span data-i18n="unit.perOz">за тр. унция</span> · <span data-field="ozUSD">—</span></div>
+            <div class="quote__live" data-tv-quote="OANDA:XAUEUR"></div>
+            <div class="quote__price quote__fallback" data-field="ozEUR">—</div>
+            <div class="quote__unit"><span data-i18n="quote.liveNote"></span></div>
             <div class="quote__row">
               <div><small data-i18n="unit.perG">за грам</small><strong data-field="gEUR">—</strong></div>
               <div><small data-i18n="unit.perKg">за кг</small><strong data-field="kgEUR">—</strong></div>
@@ -104,8 +103,9 @@
           </article>
           <article class="quote quote--silver" data-metal="XAG">
             <header><span class="quote__sym">XAG</span><span class="quote__name" data-i18n="metal.silver">Сребро</span><span class="pill pill--live" data-status><i></i><b data-i18n="status.loading">Зареждане…</b></span></header>
-            <div class="quote__price" data-field="ozEUR">—</div>
-            <div class="quote__unit"><span data-i18n="unit.perOz">за тр. унция</span> · <span data-field="ozUSD">—</span></div>
+            <div class="quote__live" data-tv-quote="OANDA:XAGEUR"></div>
+            <div class="quote__price quote__fallback" data-field="ozEUR">—</div>
+            <div class="quote__unit"><span data-i18n="quote.liveNote"></span></div>
             <div class="quote__row">
               <div><small data-i18n="unit.perG">за грам</small><strong data-field="gEUR">—</strong></div>
               <div><small data-i18n="unit.perKg">за кг</small><strong data-field="kgEUR">—</strong></div>
@@ -132,6 +132,14 @@
           <div class="kpi"><small><span data-i18n="metal.palladium"></span> · EUR/oz</small><strong data-kpi="pallOz">—</strong><span class="kpi__sub" data-kpi="pallOzUSD">—</span></div>
           <div class="kpi"><small data-i18n="dash.ratio"></small><strong data-kpi="ratio">—</strong><span class="kpi__sub">XAU / XAG</span></div>
           <div class="kpi"><small data-i18n="dash.eurusd"></small><strong data-kpi="eurusd">—</strong><span class="kpi__sub" data-kpi="eurusdDate">—</span></div>
+        </div>
+
+        <div class="card live">
+          <div class="card__head">
+            <h3 data-i18n="dash.liveTitle"></h3>
+            <span class="pill is-live"><i></i><b data-i18n="dash.liveTick"></b></span>
+          </div>
+          <div class="live__quotes" id="tvQuotes"></div>
         </div>
 
         <div class="dash">

@@ -1,6 +1,11 @@
 /* GBGOLD.BG — translations (Bulgarian, English, Turkish) */
 window.GB_I18N = {
   bg: {
+    "dash.groupMetals": "Благородни метали",
+    "dash.groupFx": "Валути",
+    "dash.liveTitle": "Живи борсови котировки",
+    "dash.liveTick": "Обновяване всяка секунда",
+    "quote.liveNote": "На живо от борсата, за тр. унция. Грам и кг: обновяване на 30 сек.",
     "meta.title": "GBGOLD.BG — Инвестиционно злато и сребро, валутен обмен",
     "meta.desc": "Инвестиционно злато и сребро от Argor-Heraeus, PAMP и Valcambi на цени, свързани със световните борси. Валутен обмен от 1990 г. Кърджали, България.",
     "nav.dashboard": "Пазари",
@@ -48,7 +53,7 @@ window.GB_I18N = {
     "dash.tableTitle": "Стойност на метала по тегло",
     "dash.tableNote": "Стойност на чистото метално съдържание по спот цена, без премия",
     "dash.weight": "Тегло",
-    "dash.source": "Източници: gold-api.com (спот), Европейска централна банка (валутни курсове), TradingView (графики).",
+    "dash.source": "Източници: TradingView (котировки на живо и графики), gold-api.com (спот), Европейска централна банка (валутни курсове).",
 
     "prod.eyebrow": "Инвестиционни продукти",
     "prod.title": "Злато и сребро за инвестиция",
@@ -153,6 +158,11 @@ window.GB_I18N = {
   },
 
   en: {
+    "dash.groupMetals": "Precious metals",
+    "dash.groupFx": "Currencies",
+    "dash.liveTitle": "Live market quotes",
+    "dash.liveTick": "Updates every second",
+    "quote.liveNote": "Live from the market, per troy oz. Gram and kg: refreshed every 30 s.",
     "meta.title": "GBGOLD.BG — Investment gold & silver, currency exchange",
     "meta.desc": "Investment gold and silver from Argor-Heraeus, PAMP and Valcambi, priced against world markets. Currency exchange since 1990. Kardzhali, Bulgaria.",
     "nav.dashboard": "Markets",
@@ -200,7 +210,7 @@ window.GB_I18N = {
     "dash.tableTitle": "Metal value by weight",
     "dash.tableNote": "Value of the fine metal content at spot, excluding premium",
     "dash.weight": "Weight",
-    "dash.source": "Sources: gold-api.com (spot), European Central Bank (exchange rates), TradingView (charts).",
+    "dash.source": "Sources: TradingView (live quotes and charts), gold-api.com (spot), European Central Bank (exchange rates).",
 
     "prod.eyebrow": "Investment products",
     "prod.title": "Gold and silver for investment",
@@ -305,6 +315,11 @@ window.GB_I18N = {
   },
 
   tr: {
+    "dash.groupMetals": "Değerli metaller",
+    "dash.groupFx": "Döviz",
+    "dash.liveTitle": "Canlı piyasa kotasyonları",
+    "dash.liveTick": "Her saniye güncellenir",
+    "quote.liveNote": "Piyasadan canlı, ons başına. Gram ve kg: 30 saniyede bir yenilenir.",
     "meta.title": "GBGOLD.BG — Yatırımlık altın ve gümüş, döviz",
     "meta.desc": "Argor-Heraeus, PAMP ve Valcambi yatırımlık altın ve gümüş, dünya piyasa fiyatlarıyla. 1990'dan beri döviz bürosu. Kırcaali, Bulgaristan.",
     "nav.dashboard": "Piyasalar",
@@ -352,7 +367,7 @@ window.GB_I18N = {
     "dash.tableTitle": "Ağırlığa göre metal değeri",
     "dash.tableNote": "Saf metal içeriğinin spot fiyattan değeri, prim hariç",
     "dash.weight": "Ağırlık",
-    "dash.source": "Kaynaklar: gold-api.com (spot), Avrupa Merkez Bankası (döviz kurları), TradingView (grafikler).",
+    "dash.source": "Kaynaklar: TradingView (canlı kotasyonlar ve grafikler), gold-api.com (spot), Avrupa Merkez Bankası (döviz kurları).",
 
     "prod.eyebrow": "Yatırım ürünleri",
     "prod.title": "Yatırımlık altın ve gümüş",
