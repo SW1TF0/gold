@@ -1,0 +1,38 @@
+<!-- title: title.calculator | canonical: calculator.html -->
+    <!-- CALCULATOR -->
+    <section class="section section--first section--alt" id="calculator">
+      <div class="container calc">
+        <div class="calc__intro">
+          <p class="eyebrow" data-i18n="calc.eyebrow"></p>
+          <h2 data-i18n="calc.title"></h2>
+          <p class="muted" data-i18n="calc.note"></p>
+        </div>
+        <form class="card calc__form" id="calcForm" onsubmit="return false">
+          <div class="field">
+            <span data-i18n="calc.metal"></span>
+            <div class="seg" id="calcMetal">
+              <button type="button" class="is-active" data-metal="XAU" data-i18n="metal.gold"></button>
+              <button type="button" data-metal="XAG" data-i18n="metal.silver"></button>
+            </div>
+          </div>
+          <div class="field-row">
+            <label class="field"><span data-i18n="calc.weight"></span>
+              <select id="calcWeight"></select>
+            </label>
+            <label class="field"><span data-i18n="calc.qty"></span>
+              <input id="calcQty" type="number" min="1" max="10000" value="1" inputmode="numeric">
+            </label>
+            <label class="field"><span data-i18n="calc.currency"></span>
+              <select id="calcCur"><option>EUR</option><option>USD</option><option>TRY</option><option>GBP</option><option>CHF</option></select>
+            </label>
+          </div>
+          <div class="calc__result">
+            <small data-i18n="calc.result"></small>
+            <strong id="calcTotal">—</strong>
+            <span class="muted" id="calcUnit"></span>
+          </div>
+          <a class="btn btn--gold btn--block" id="calcCta" href="contact.html?i=gold" data-i18n="calc.cta"></a>
+        </form>
+      </div>
+    </section>
+

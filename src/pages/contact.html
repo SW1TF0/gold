@@ -1,0 +1,39 @@
+<!-- title: title.contact | canonical: contact.html -->
+    <!-- CONTACT -->
+    <section class="section section--first section--alt" id="contact">
+      <div class="container contact">
+        <div class="contact__info">
+          <p class="eyebrow" data-i18n="contact.eyebrow"></p>
+          <h2 data-i18n="contact.title"></h2>
+          <p class="lead" data-i18n="contact.lead"></p>
+          <ul class="contact__list">
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+              <div><small data-i18n="contact.phone"></small><a href="tel:+359888272619">+359 888 272 619</a></div></li>
+            <li><svg class="ico" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 3.3V18h16V7.3l-8 5.2z"/></svg>
+              <div><small data-i18n="contact.email"></small><a href="mailto:info@gbgold.bg">info@gbgold.bg</a></div></li>
+            <li><svg class="ico" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+              <div><small data-i18n="contact.address"></small><span data-i18n="contact.addressVal"></span>
+              <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%D1%83%D0%BB.+%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D0%B8+%D0%9A%D0%BE%D0%BD%D0%B4%D0%BE%D0%BB%D0%BE%D0%B2+18+%D0%9A%D1%8A%D1%80%D0%B4%D0%B6%D0%B0%D0%BB%D0%B8" data-i18n="contact.map"></a></div></li>
+          </ul>
+          <a href="tel:+359888272619" class="btn btn--gold" data-i18n="cta.call"></a>
+        </div>
+        <form class="card contact__form" id="contactForm">
+          <h3 data-i18n="contact.formTitle"></h3>
+          <div class="field-row">
+            <label class="field"><span data-i18n="contact.name"></span><input name="name" required autocomplete="name"></label>
+            <label class="field"><span data-i18n="contact.tel"></span><input name="phone" type="tel" required autocomplete="tel"></label>
+          </div>
+          <label class="field"><span data-i18n="contact.interest"></span>
+            <select name="interest" id="interest">
+              <option value="gold" data-i18n="contact.optGold"></option>
+              <option value="silver" data-i18n="contact.optSilver"></option>
+              <option value="fx" data-i18n="contact.optFx"></option>
+              <option value="other" data-i18n="contact.optOther"></option>
+            </select>
+          </label>
+          <label class="field"><span data-i18n="contact.message"></span><textarea name="message" rows="4" id="message"></textarea></label>
+          <button class="btn btn--gold btn--block" type="submit" data-i18n="contact.send"></button>
+          <p class="muted small" data-i18n="contact.formNote"></p>
+        </form>
+      </div>
+    </section>
