@@ -231,6 +231,7 @@
     k("pallOzUSD", money(ozIn("XPD", "USD"), "USD"));
     const g = state.metals.XAU, s = state.metals.XAG;
     k("ratio", g && s ? num(g.usd / s.usd, 2) : "—");
+    k("ratio2", g && s ? num(g.usd / s.usd, 2) : "—");
     k("eurusd", eurUsd() ? num(eurUsd(), 4) : "—");
     k("eurusdDate", state.fx ? state.fx.date : "—");
 
@@ -281,6 +282,8 @@
     sc.async = true;
     host.classList.remove("tv-off");
     sc.onerror = () => host.classList.add("tv-off");
+    host.classList.remove("tv-off");
+    sc.onerror = () => host.classList.add("tv-off");
     sc.textContent = JSON.stringify(Object.assign({ colorTheme: "dark", theme: "dark", isTransparent: false, backgroundColor: "#16130f", locale: tvLocale() }, config));
     wrap.appendChild(sc);
     host.appendChild(wrap);
@@ -297,6 +300,17 @@
         { proName: "FX:EURGBP", title: "EUR/GBP" }, { proName: "FX:EURCHF", title: "EUR/CHF" }
       ],
       showSymbolLogo: false, displayMode: "adaptive"
+    });
+    $$("[data-tv-quote]").forEach((n) => tvEmbed(n, "single-quote", { symbol: n.dataset.tvQuote, width: "100%" }));
+    tvEmbed($("#tvTickers"), "tickers", {
+      symbols: [
+        { proName: "OANDA:XAUEUR", title: T("metal.gold") + " · EUR/oz" },
+        { proName: "OANDA:XAGEUR", title: T("metal.silver") + " · EUR/oz" },
+        { proName: "OANDA:XPTUSD", title: T("metal.platinum") + " · USD/oz" },
+        { proName: "OANDA:XPDUSD", title: T("metal.palladium") + " · USD/oz" },
+        { proName: "FX:EURUSD", title: "EUR/USD" }
+      ],
+      showSymbolLogo: true
     });
     const q = (s, name) => ({ name: s, displayName: name });
     tvEmbed($("#tvQuotes"), "market-quotes", {

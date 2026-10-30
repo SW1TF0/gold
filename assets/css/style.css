@@ -90,6 +90,16 @@ p { margin: 0 0 1em; }
 /* the page uses color-scheme: dark; without this, browsers paint a white backdrop behind third-party iframes */
 .tradingview-widget-container iframe { color-scheme: normal; }
 .ticker { background: #16130f; }
+/* TradingView slots; the matching .tv-fallback only shows if the widget script fails to load */
+.tv-slot .tradingview-widget-container { height: 100%; }
+.tv-slot.tv-off { display: none; }
+.tv-fallback { display: none; }
+.tv-slot.tv-off + .tv-fallback { display: block; }
+.tv-slot.tv-off + .kpis.tv-fallback { display: grid; }
+.quote__live { height: 96px; margin: 0 -10px; }
+.kpis-live { height: 82px; margin-bottom: 22px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--line-2); background: #16130f; }
+.ratio-pill { margin-left: auto; margin-right: 6px; font-size: .74rem; color: var(--muted); }
+.ratio-pill b { font-family: var(--mono); color: var(--gold-2); font-weight: 500; margin-left: 4px; }
 .live { margin-bottom: 22px; }
 .live__quotes { height: 480px; }
 

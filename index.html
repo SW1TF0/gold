@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030c">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261030d">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -92,7 +92,8 @@
         <div class="hero__quotes">
           <article class="quote quote--gold" data-metal="XAU">
             <header><span class="quote__sym">XAU</span><span class="quote__name" data-i18n="metal.gold">Злато</span><span class="pill pill--live" data-status><i></i><b data-i18n="status.loading">Зареждане…</b></span></header>
-            <div class="quote__price" data-field="ozEUR">—</div>
+            <div class="tv-slot quote__live" data-tv-quote="OANDA:XAUEUR"></div>
+            <div class="quote__price tv-fallback" data-field="ozEUR">—</div>
             <div class="quote__unit"><span data-i18n="unit.perOz">за тр. унция</span> · <span data-field="ozUSD">—</span></div>
             <div class="quote__row">
               <div><small data-i18n="unit.perG">за грам</small><strong data-field="gEUR">—</strong></div>
@@ -102,7 +103,8 @@
           </article>
           <article class="quote quote--silver" data-metal="XAG">
             <header><span class="quote__sym">XAG</span><span class="quote__name" data-i18n="metal.silver">Сребро</span><span class="pill pill--live" data-status><i></i><b data-i18n="status.loading">Зареждане…</b></span></header>
-            <div class="quote__price" data-field="ozEUR">—</div>
+            <div class="tv-slot quote__live" data-tv-quote="OANDA:XAGEUR"></div>
+            <div class="quote__price tv-fallback" data-field="ozEUR">—</div>
             <div class="quote__unit"><span data-i18n="unit.perOz">за тр. унция</span> · <span data-field="ozUSD">—</span></div>
             <div class="quote__row">
               <div><small data-i18n="unit.perG">за грам</small><strong data-field="gEUR">—</strong></div>
@@ -123,7 +125,8 @@
           <p class="lead" data-i18n="dash.lead"></p>
         </div>
 
-        <div class="kpis" id="kpis">
+        <div class="tv-slot kpis-live" id="tvTickers"></div>
+        <div class="kpis tv-fallback" id="kpis">
           <div class="kpi"><small><span data-i18n="metal.gold"></span> · EUR/oz</small><strong data-kpi="goldOz">—</strong><span class="kpi__sub" data-kpi="goldOzUSD">—</span></div>
           <div class="kpi"><small><span data-i18n="metal.silver"></span> · EUR/oz</small><strong data-kpi="silverOz">—</strong><span class="kpi__sub" data-kpi="silverOzUSD">—</span></div>
           <div class="kpi"><small><span data-i18n="metal.platinum"></span> · EUR/oz</small><strong data-kpi="platOz">—</strong><span class="kpi__sub" data-kpi="platOzUSD">—</span></div>
@@ -159,6 +162,7 @@
             <div class="card">
               <div class="card__head">
                 <h3 data-i18n="dash.sessionTitle"></h3>
+                <span class="ratio-pill"><span data-i18n="dash.ratio"></span> <b data-kpi="ratio2">—</b></span>
                 <div class="tabs tabs--sm" id="sessionTabs">
                   <button type="button" class="is-active" data-metal="XAU">XAU</button>
                   <button type="button" data-metal="XAG">XAG</button>
@@ -440,8 +444,8 @@
     <svg class="ico" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
   </a>
 
-  <script src="assets/js/i18n.js?v=20261030c"></script>
-  <script src="assets/js/charts.js?v=20261030c"></script>
-  <script src="assets/js/app.js?v=20261030c"></script>
+  <script src="assets/js/i18n.js?v=20261030d"></script>
+  <script src="assets/js/charts.js?v=20261030d"></script>
+  <script src="assets/js/app.js?v=20261030d"></script>
 </body>
 </html>
