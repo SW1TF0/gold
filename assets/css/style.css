@@ -87,6 +87,9 @@ p { margin: 0 0 1em; }
   background: #070605; border-bottom: 1px solid var(--line);
 }
 .ticker .tradingview-widget-container, .live__quotes .tradingview-widget-container { height: 100%; }
+/* the page uses color-scheme: dark; without this, browsers paint a white backdrop behind third-party iframes */
+.tradingview-widget-container iframe { color-scheme: normal; }
+.ticker { background: #16130f; }
 .live { margin-bottom: 22px; }
 .live__quotes { height: 480px; }
 
