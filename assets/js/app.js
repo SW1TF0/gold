@@ -28,9 +28,7 @@
     metals: {},          // XAU: {usd, updatedAt}
     prevMetals: {},
     fx: null,            // {date, rates:{USD:..}, prev:{USD:..}}
-    session: store.get("gb_session_v1", { XAU: [], XAG: [] }),
     tvSymbol: "OANDA:XAUUSD",
-    sessionMetal: "XAU",
     cat: "goldBars",
     brand: "",
     calcMetal: "XAU",
@@ -151,7 +149,6 @@
       }
     });
     state.metalsOk = ok || Object.keys(state.metals).length > 0;
-    if (ok) recordSession();
     renderPrices();
   }
 
@@ -169,20 +166,6 @@
     state.fxTried = true;
     renderPrices();
     renderFx();
-  }
-
-  // ---------- session history ----------
-  function recordSession() {
-    const now = Date.now();
-    ["XAU", "XAG"].forEach((s) => {
-      const m = state.metals[s];
-      if (!m) return;
-      const arr = (state.session[s] = (state.session[s] || []).filter((p) => now - p.t < 12 * 3600e3));
-      const last = arr[arr.length - 1];
-      if (!last || now - last.t > 5000) arr.push({ t: now, v: m.usd });
-      if (arr.length > 1500) arr.splice(0, arr.length - 1500);
-    });
-    store.set("gb_session_v1", state.session);
   }
 
   // ---------- rendering: live prices ----------
@@ -215,8 +198,6 @@
       set("gEUR", money(gramIn(s, "EUR"), "EUR", 2));
       set("kgEUR", money(gramIn(s, "EUR") != null ? gramIn(s, "EUR") * 1000 : null, "EUR", 0));
       if (prev && cur && prev.usd !== cur.usd) flash($('[data-field="ozEUR"]', card), cur.usd - prev.usd);
-      const spark = $(`[data-spark="${s}"]`);
-      if (spark) GBCharts.sparkline(spark, (state.session[s] || []).map((p) => p.v), COLORS[s]);
     });
 
     // KPIs
@@ -239,7 +220,6 @@
     if (lu) lu.textContent = g ? `${T("status.updated")}: ${timeStr(g.updatedAt, true)}` : "";
 
     renderWeightTable();
-    renderSession();
     renderProducts(true);
     renderCalc();
   }
@@ -249,20 +229,6 @@
     const tb = $("#weightTable tbody");
     const gg = gramIn("XAU", "EUR"), sg = gramIn("XAG", "EUR");
     tb.innerHTML = WEIGHTS.map((w) => `<tr><td>${fmtWeight(w)}</td><td class="num">${money(gg != null ? gg * w * 0.9999 : null, "EUR", w >= 100 ? 0 : 2)}</td><td class="num">${money(sg != null ? sg * w * 0.999 : null, "EUR", 2)}</td></tr>`).join("");
-  }
-
-  function renderSession() {
-    const host = $("#sessionChart");
-    const s = state.sessionMetal;
-    const eu = eurUsd();
-    const pts = (state.session[s] || []).map((p) => ({ t: p.t, v: eu ? p.v / eu : p.v }));
-    const cur = eu ? "EUR" : "USD";
-    GBCharts.areaChart(host, pts, {
-      color: COLORS[s], height: 190,
-      format: (v) => money(v, cur, s === "XAG" ? 3 : 2),
-      formatTime: (t, full) => timeStr(t, full),
-      emptyText: state.metalsOk === false ? T("status.offline") : T("status.loading")
-    });
   }
 
   // ---------- TradingView professional chart ----------
@@ -430,10 +396,24 @@
     return `<div class="viz viz--bar viz--${metal}"><div class="bar bar--${size}${p.combi ? " bar--combi" : ""}"><small>${brandMark}</small><b>${fmtWeight(p.g)}</b><span>${metalWord}</span><small>${fine}</small></div></div>`;
   }
 
+  function spotStamp() {
+    const m = state.metals.XAU;
+    return m ? new Date(m.updatedAt).toLocaleTimeString(LOCALES[state.lang], { hour: "2-digit", minute: "2-digit", second: "2-digit" }) : "—";
+  }
+
   function renderProducts(valuesOnly) {
     const grid = $("#productGrid");
     if (valuesOnly && grid.children.length) {
-      $$("[data-pv]", grid).forEach((n) => { n.textContent = money(productValue(PRODUCTS[+n.dataset.pv]), "EUR"); });
+      const stamp = spotStamp();
+      $$("[data-pv]", grid).forEach((n) => {
+        const v = productValue(PRODUCTS[+n.dataset.pv]);
+        const before = parseFloat(n.dataset.v);
+        n.textContent = money(v, "EUR");
+        if (v != null && isFinite(before) && v !== before) flash(n, v - before);
+        if (v != null) n.dataset.v = v;
+      });
+      $$("[data-pt]", grid).forEach((n) => { n.textContent = stamp; });
+      $$(".live-dot", grid).forEach((n) => n.classList.toggle("is-on", !!state.metalsOk));
       return;
     }
     const coins = state.cat.endsWith("Coins");
@@ -449,7 +429,7 @@
             <div><dt>${T("prod.fine")}</dt><dd>${p.fine.toFixed(p.fine % 1 ? 1 : 0)}</dd></div>
             <div><dt>${T("prod.fineWeight")}</dt><dd>${num(p.fineG, 2)} g</dd></div>
           </dl>
-          <div class="product__value"><small>${T("prod.metalValue")}</small><strong data-pv="${p.id}">${money(productValue(p), "EUR")}</strong><em>${T("prod.priceNote")}</em></div>
+          <div class="product__value"><small>${T("prod.metalValue")} <span class="live-dot${state.metalsOk ? " is-on" : ""}"></span></small><strong data-pv="${p.id}" data-v="${productValue(p) ?? ""}">${money(productValue(p), "EUR")}</strong><em>${T("prod.spotLive")} <span data-pt>${spotStamp()}</span> · ${T("prod.priceNote")}</em></div>
           <div class="product__cta">
             <a class="btn btn--gold btn--sm" href="tel:${PHONE}">${T("cta.ask")}</a>
             <a class="btn btn--ghost btn--sm" href="#contact" data-product="${p.id}">${T("cta.email")}</a>
@@ -584,7 +564,6 @@
       fn(b.dataset[attr]);
     }));
     tabs("#tvTabs", "symbol", (s) => { state.tvSymbol = s; renderTradingView(); });
-    tabs("#sessionTabs", "metal", (m) => { state.sessionMetal = m; renderSession(); });
     tabs("#catTabs", "cat", (c) => { state.cat = c; renderProducts(); });
     tabs("#histRange", "days", (d) => { state.histDays = +d; renderFxHistory(); });
     $$("#calcMetal button").forEach((b) => b.addEventListener("click", () => {
@@ -618,7 +597,7 @@
     });
 
     let rt;
-    addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(() => { renderSession(); renderFxHistory(); }, 200); });
+    addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderFxHistory, 200); });
     document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMetals(); });
   }
 

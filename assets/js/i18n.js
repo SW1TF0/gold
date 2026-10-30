@@ -1,6 +1,7 @@
 /* GBGOLD.BG — translations (Bulgarian, English, Turkish) */
 window.GB_I18N = {
   bg: {
+    "prod.spotLive": "Световна спот цена, обновена в",
     "dash.groupMetals": "Благородни метали",
     "dash.groupFx": "Валути",
     "dash.liveTitle": "Живи борсови котировки",
@@ -157,6 +158,7 @@ window.GB_I18N = {
   },
 
   en: {
+    "prod.spotLive": "World spot price, updated",
     "dash.groupMetals": "Precious metals",
     "dash.groupFx": "Currencies",
     "dash.liveTitle": "Live market quotes",
@@ -313,6 +315,7 @@ window.GB_I18N = {
   },
 
   tr: {
+    "prod.spotLive": "Dünya spot fiyatı, güncelleme",
     "dash.groupMetals": "Değerli metaller",
     "dash.groupFx": "Döviz",
     "dash.liveTitle": "Canlı piyasa kotasyonları",

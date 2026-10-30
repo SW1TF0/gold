@@ -266,7 +266,13 @@ select option { background: #16130f; }
 .product__value { margin-top: auto; padding: 12px 14px; border-radius: var(--radius-sm); background: rgba(212, 175, 55, .06); border: 1px solid var(--line); }
 .product__value small { display: block; font-size: .7rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
 .product__value strong { display: block; font: 600 1.25rem var(--sans); color: var(--gold-2); font-variant-numeric: tabular-nums; }
-.product__value em { font-style: normal; font-size: .74rem; color: var(--muted); }
+.product__value em { font-style: normal; font-size: .72rem; color: var(--muted); display: block; line-height: 1.4; }
+.product__value em [data-pt] { font-family: var(--mono); color: #cfc7b6; }
+.product__value strong.up { animation: flashUp 1.2s; color: var(--up); }
+.product__value strong.down { animation: flashDown 1.2s; color: var(--down); }
+.product__value strong { transition: color 1.2s; }
+.live-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--muted); margin-left: 6px; vertical-align: middle; }
+.live-dot.is-on { background: var(--up); animation: pulse 2s infinite; }
 .product__cta { display: grid; grid-template-columns: 1fr; gap: 8px; margin-top: 14px; }
 .product__cta .btn { padding-inline: 10px; }
 
