@@ -75,6 +75,7 @@
     applyI18n();
     renderAll();
     renderTradingView();
+    renderLiveWidgets();
   }
 
   // ---------- formatting ----------
@@ -213,7 +214,7 @@
       set("ozUSD", money(ozIn(s, "USD"), "USD"));
       set("gEUR", money(gramIn(s, "EUR"), "EUR", 2));
       set("kgEUR", money(gramIn(s, "EUR") != null ? gramIn(s, "EUR") * 1000 : null, "EUR", 0));
-      if (prev && cur && prev.usd !== cur.usd) flash($('[data-field="ozEUR"]', card), cur.usd - prev.usd);
+      if (prev && cur && prev.usd !== cur.usd) flash($('[data-field="gEUR"]', card), cur.usd - prev.usd);
       const spark = $(`[data-spark="${s}"]`);
       if (spark) GBCharts.sparkline(spark, (state.session[s] || []).map((p) => p.v), COLORS[s]);
     });
@@ -236,30 +237,10 @@
     const lu = $("#lastUpdate");
     if (lu) lu.textContent = g ? `${T("status.updated")}: ${timeStr(g.updatedAt, true)}` : "";
 
-    renderTicker();
     renderWeightTable();
     renderSession();
     renderProducts(true);
     renderCalc();
-  }
-
-  function renderTicker() {
-    const items = [];
-    [["XAU", "metal.gold"], ["XAG", "metal.silver"], ["XPT", "metal.platinum"], ["XPD", "metal.palladium"]].forEach(([s, key]) => {
-      const cur = state.metals[s], prev = state.prevMetals[s];
-      const dir = cur && prev ? Math.sign(cur.usd - prev.usd) : 0;
-      items.push({ label: `${T(key)} <i>${s}/EUR</i>`, value: money(ozIn(s, "EUR"), "EUR"), sub: money(ozIn(s, "USD"), "USD"), dir });
-    });
-    if (state.fx) {
-      ["USD", "TRY", "GBP", "CHF", "RON"].forEach((c) => {
-        const r = state.fx.rates[c], p = state.fx.prev && state.fx.prev[c];
-        const ch = r && p ? ((r - p) / p) * 100 : null;
-        items.push({ label: `<i>EUR/${c}</i>`, value: num(r, c === "JPY" ? 2 : 4), sub: pct(ch), dir: ch ? Math.sign(ch) : 0 });
-      });
-    }
-    const html = items.map((i) => `<span class="tick ${i.dir > 0 ? "up" : i.dir < 0 ? "down" : ""}"><span class="tick__l">${i.label}</span><b>${i.value}</b><small>${i.sub}</small></span>`).join("");
-    const track = $("#tickerTrack");
-    track.innerHTML = `<div class="ticker__group">${html}</div><div class="ticker__group" aria-hidden="true">${html}</div>`;
   }
 
   const WEIGHTS = [1, 2.5, 5, 10, 20, OZ, 50, 100, 250, 500, 1000];
@@ -284,6 +265,57 @@
   }
 
   // ---------- TradingView professional chart ----------
+  // ---------- TradingView live widgets (stream every second) ----------
+  const TV_BASE = "https://s3.tradingview.com/external-embedding/embed-widget-";
+  function tvLocale() { return state.lang === "tr" ? "tr" : "en"; }
+  function tvEmbed(host, name, config) {
+    if (!host) return;
+    host.innerHTML = "";
+    const wrap = document.createElement("div");
+    wrap.className = "tradingview-widget-container";
+    const inner = document.createElement("div");
+    inner.className = "tradingview-widget-container__widget";
+    wrap.appendChild(inner);
+    const sc = document.createElement("script");
+    sc.src = TV_BASE + name + ".js";
+    sc.async = true;
+    host.classList.remove("tv-off");
+    sc.onerror = () => host.classList.add("tv-off");
+    sc.textContent = JSON.stringify(Object.assign({ colorTheme: "dark", isTransparent: true, locale: tvLocale() }, config));
+    wrap.appendChild(sc);
+    host.appendChild(wrap);
+  }
+
+  function renderLiveWidgets() {
+    const sym = (s, key) => ({ proName: s, title: T(key) });
+    tvEmbed($("#tvTicker"), "ticker-tape", {
+      symbols: [
+        sym("OANDA:XAUEUR", "metal.gold"), sym("OANDA:XAGEUR", "metal.silver"),
+        sym("OANDA:XAUUSD", "metal.gold"), sym("OANDA:XAGUSD", "metal.silver"),
+        sym("OANDA:XPTUSD", "metal.platinum"), sym("OANDA:XPDUSD", "metal.palladium"),
+        { proName: "FX:EURUSD", title: "EUR/USD" }, { proName: "FX_IDC:EURTRY", title: "EUR/TRY" },
+        { proName: "FX:EURGBP", title: "EUR/GBP" }, { proName: "FX:EURCHF", title: "EUR/CHF" }
+      ],
+      showSymbolLogo: false, displayMode: "adaptive"
+    });
+    $$("[data-tv-quote]").forEach((n) => tvEmbed(n, "single-quote", { symbol: n.dataset.tvQuote, width: "100%" }));
+    const q = (s, name) => ({ name: s, displayName: name });
+    tvEmbed($("#tvQuotes"), "market-quotes", {
+      width: "100%", height: "100%", showSymbolLogo: false, backgroundColor: "rgba(0,0,0,0)",
+      symbolsGroups: [
+        { name: T("dash.groupMetals"), symbols: [
+          q("OANDA:XAUEUR", T("metal.gold") + " · EUR/oz"), q("OANDA:XAUUSD", T("metal.gold") + " · USD/oz"),
+          q("OANDA:XAGEUR", T("metal.silver") + " · EUR/oz"), q("OANDA:XAGUSD", T("metal.silver") + " · USD/oz"),
+          q("OANDA:XPTUSD", T("metal.platinum") + " · USD/oz"), q("OANDA:XPDUSD", T("metal.palladium") + " · USD/oz")
+        ] },
+        { name: T("dash.groupFx"), symbols: [
+          q("FX:EURUSD", "EUR/USD"), q("FX_IDC:EURTRY", "EUR/TRY"), q("FX:EURGBP", "EUR/GBP"),
+          q("FX:EURCHF", "EUR/CHF"), q("FX_IDC:EURRON", "EUR/RON"), q("FX:EURJPY", "EUR/JPY")
+        ] }
+      ]
+    });
+  }
+
   function renderTradingView() {
     const host = $("#tvChart");
     if (!host) return;
@@ -595,6 +627,7 @@
     bindContact();
     renderAll();
     renderTradingView();
+    renderLiveWidgets();
     loadFx().then(loadMetals);
     loadMetals();
     setInterval(() => { if (!document.hidden) loadMetals(); }, METAL_POLL_MS);
