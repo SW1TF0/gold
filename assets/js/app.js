@@ -214,7 +214,7 @@
       set("ozUSD", money(ozIn(s, "USD"), "USD"));
       set("gEUR", money(gramIn(s, "EUR"), "EUR", 2));
       set("kgEUR", money(gramIn(s, "EUR") != null ? gramIn(s, "EUR") * 1000 : null, "EUR", 0));
-      if (prev && cur && prev.usd !== cur.usd) flash($('[data-field="gEUR"]', card), cur.usd - prev.usd);
+      if (prev && cur && prev.usd !== cur.usd) flash($('[data-field="ozEUR"]', card), cur.usd - prev.usd);
       const spark = $(`[data-spark="${s}"]`);
       if (spark) GBCharts.sparkline(spark, (state.session[s] || []).map((p) => p.v), COLORS[s]);
     });
@@ -298,7 +298,6 @@
       ],
       showSymbolLogo: false, displayMode: "adaptive"
     });
-    $$("[data-tv-quote]").forEach((n) => tvEmbed(n, "single-quote", { symbol: n.dataset.tvQuote, width: "100%" }));
     const q = (s, name) => ({ name: s, displayName: name });
     tvEmbed($("#tvQuotes"), "market-quotes", {
       width: "100%", height: "100%", showSymbolLogo: false, backgroundColor: "rgba(0,0,0,0)",
