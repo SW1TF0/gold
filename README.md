@@ -40,3 +40,5 @@ Upload the repository contents to any static host (GitHub Pages, Netlify, Cloudf
 - Text in all three languages: `assets/js/i18n.js`
 - Product catalogue: `PRODUCTS` in `assets/js/app.js`
 - Contact details: `index.html` (header, contact section, footer) and `PHONE` / `EMAIL` in `assets/js/app.js`
+
+After changing any CSS/JS file, bump the `?v=` number on its `<link>`/`<script>` tags in `index.html` and `terms.html` so visitors do not keep an old cached copy.

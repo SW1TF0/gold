@@ -622,12 +622,10 @@
     state.lang = pickLang();
     $$("[data-year]").forEach((n) => { n.textContent = new Date().getFullYear(); });
     $$("[data-years]").forEach((n) => { n.textContent = new Date().getFullYear() - 1990 + "+"; });
-    applyI18n();
-    bind();
-    bindContact();
-    renderAll();
-    renderTradingView();
-    renderLiveWidgets();
+    // each step is isolated so one broken section never stops the price feeds
+    [applyI18n, bind, bindContact, renderAll, renderTradingView, renderLiveWidgets].forEach((step) => {
+      try { step(); } catch (e) { console.error(e); }
+    });
     loadFx().then(loadMetals);
     loadMetals();
     setInterval(() => { if (!document.hidden) loadMetals(); }, METAL_POLL_MS);
