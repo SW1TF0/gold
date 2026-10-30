@@ -86,11 +86,7 @@ p { margin: 0 0 1em; }
   position: relative; z-index: 60; height: 46px; overflow: hidden;
   background: #070605; border-bottom: 1px solid var(--line);
 }
-.ticker .tradingview-widget-container, .quote__live .tradingview-widget-container, .live__quotes .tradingview-widget-container { height: 100%; }
-.quote__live { height: 84px; margin: 0 -12px; }
-.quote__live.tv-off { display: none; }
-.quote__fallback { display: none; }
-.quote__live.tv-off + .quote__fallback { display: block; }
+.ticker .tradingview-widget-container, .live__quotes .tradingview-widget-container { height: 100%; }
 .live { margin-bottom: 22px; }
 .live__quotes { height: 480px; }
 
