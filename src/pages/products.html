@@ -1,0 +1,57 @@
+<!-- title: title.products | canonical: products.html -->
+    <!-- PRODUCTS -->
+    <section class="section section--first section--alt" id="products">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-i18n="prod.eyebrow"></p>
+          <h2 data-i18n="prod.title"></h2>
+          <p class="lead" data-i18n="prod.lead"></p>
+        </div>
+        <div class="filters">
+          <div class="tabs tabs--lg" id="catTabs" role="tablist">
+            <button type="button" class="is-active" data-cat="goldBars" data-i18n="prod.goldBars"></button>
+            <button type="button" data-cat="goldCoins" data-i18n="prod.goldCoins"></button>
+            <button type="button" data-cat="silverBars" data-i18n="prod.silverBars"></button>
+            <button type="button" data-cat="silverCoins" data-i18n="prod.silverCoins"></button>
+          </div>
+          <label class="select">
+            <select id="brandFilter" aria-label="Brand">
+              <option value="" data-i18n="prod.allBrands"></option>
+              <option value="Argor-Heraeus">Argor-Heraeus</option>
+              <option value="PAMP">PAMP Suisse</option>
+              <option value="Valcambi">Valcambi Suisse</option>
+            </select>
+          </label>
+        </div>
+        <div class="products" id="productGrid"></div>
+      </div>
+    </section>
+
+    <!-- BRANDS -->
+    <section class="section" id="brands">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-i18n="brands.eyebrow"></p>
+          <h2 data-i18n="brands.title"></h2>
+          <p class="lead" data-i18n="brands.lead"></p>
+        </div>
+        <div class="brands">
+          <article class="brand">
+            <div class="brand__mark brand__mark--argor"><span>ARGOR</span><b>AH</b><span>HERAEUS SA</span></div>
+            <h3>Argor-Heraeus SA</h3>
+            <p data-i18n="brands.argor"></p>
+          </article>
+          <article class="brand">
+            <div class="brand__mark brand__mark--pamp"><b>PAMP</b><span>Produits Artistiques Métaux Précieux</span></div>
+            <h3>PAMP Suisse</h3>
+            <p data-i18n="brands.pamp"></p>
+          </article>
+          <article class="brand">
+            <div class="brand__mark brand__mark--valcambi"><b>valcambi</b><span>suisse</span></div>
+            <h3>Valcambi Suisse</h3>
+            <p data-i18n="brands.valcambi"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+

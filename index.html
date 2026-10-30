@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title data-i18n="meta.title">GBGOLD.BG — Инвестиционно злато и сребро, валутен обмен</title>
+  <title data-i18n="meta.title">GBGOLD.BG</title>
   <meta name="description" data-i18n-attr="content:meta.desc" content="Инвестиционно злато и сребро от Argor-Heraeus, PAMP и Valcambi на цени, свързани със световните борси. Валутен обмен от 1990 г. Кърджали, България.">
   <meta name="theme-color" content="#0b0a08">
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/style.css?v=20261030e">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261030f">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -35,25 +35,25 @@
   }
   </script>
 </head>
-<body>
+<body data-page="home">
   <!-- Live ticker strip -->
   <div class="ticker" id="tvTicker" aria-label="Live prices"></div>
 
   <header class="header" id="header">
     <div class="container header__inner">
-      <a href="#top" class="logo" aria-label="GBGOLD.BG">
+      <a href="index.html" class="logo" aria-label="GBGOLD.BG">
         <span class="logo__mark" aria-hidden="true">
           <svg viewBox="0 0 40 40"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f4dc9b"/><stop offset=".5" stop-color="#c9a24d"/><stop offset="1" stop-color="#8a6a2a"/></linearGradient></defs><path d="M4 30 L12 12 H28 L36 30 Z" fill="url(#lg)"/><path d="M12 12 L16 18 H24 L28 12" fill="none" stroke="#0b0a08" stroke-opacity=".35" stroke-width="1.2"/><path d="M16 18 L10 30 M24 18 L30 30" stroke="#0b0a08" stroke-opacity=".25" stroke-width="1.2"/></svg>
         </span>
         <span class="logo__text">GB<b>GOLD</b><small>.BG</small></span>
       </a>
       <nav class="nav" id="nav" aria-label="Main">
-        <a href="#markets" data-i18n="nav.dashboard">Пазари</a>
-        <a href="#products" data-i18n="nav.products">Продукти</a>
-        <a href="#calculator" data-i18n="nav.calculator">Калкулатор</a>
-        <a href="#fx" data-i18n="nav.fx">Валута</a>
-        <a href="#about" data-i18n="nav.about">За нас</a>
-        <a href="#contact" data-i18n="nav.contact">Контакти</a>
+        <a href="markets.html" data-nav="markets" data-i18n="nav.dashboard">Пазари</a>
+        <a href="products.html" data-nav="products" data-i18n="nav.products">Продукти</a>
+        <a href="calculator.html" data-nav="calculator" data-i18n="nav.calculator">Калкулатор</a>
+        <a href="fx.html" data-nav="fx" data-i18n="nav.fx">Валута</a>
+        <a href="about.html" data-nav="about" data-i18n="nav.about">За нас</a>
+        <a href="contact.html" data-nav="contact" data-i18n="nav.contact">Контакти</a>
       </nav>
       <div class="header__actions">
         <div class="lang" role="group" aria-label="Language">
@@ -70,6 +70,7 @@
     </div>
   </header>
 
+
   <main id="top">
     <!-- HERO -->
     <section class="hero">
@@ -80,8 +81,8 @@
           <h1 data-i18n-html="hero.title">Инвестиционно злато и сребро <em>по световни цени</em></h1>
           <p class="lead" data-i18n="hero.lead"></p>
           <div class="hero__cta">
-            <a href="#contact" class="btn btn--gold" data-i18n="cta.contact">Свържете се с нас</a>
-            <a href="#products" class="btn btn--ghost" data-i18n="cta.explore">Разгледай продуктите</a>
+            <a href="contact.html" class="btn btn--gold" data-i18n="cta.contact">Свържете се с нас</a>
+            <a href="products.html" class="btn btn--ghost" data-i18n="cta.explore">Разгледай продуктите</a>
           </div>
           <ul class="trust">
             <li><svg class="ico" viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5z"/></svg><span data-i18n="hero.trust1"></span></li>
@@ -114,210 +115,24 @@
       </div>
     </section>
 
-    <!-- DASHBOARD -->
-    <section class="section" id="markets">
+    <section class="home-tickers">
       <div class="container">
-        <div class="section__head">
-          <p class="eyebrow" data-i18n="dash.eyebrow"></p>
-          <h2 data-i18n="dash.title"></h2>
-          <p class="lead" data-i18n="dash.lead"></p>
-        </div>
-
         <div class="tv-slot kpis-live" id="tvTickers"></div>
-        <div class="kpis tv-fallback" id="kpis">
-          <div class="kpi"><small><span data-i18n="metal.gold"></span> · EUR/oz</small><strong data-kpi="goldOz">—</strong><span class="kpi__sub" data-kpi="goldOzUSD">—</span></div>
-          <div class="kpi"><small><span data-i18n="metal.silver"></span> · EUR/oz</small><strong data-kpi="silverOz">—</strong><span class="kpi__sub" data-kpi="silverOzUSD">—</span></div>
-          <div class="kpi"><small><span data-i18n="metal.platinum"></span> · EUR/oz</small><strong data-kpi="platOz">—</strong><span class="kpi__sub" data-kpi="platOzUSD">—</span></div>
-          <div class="kpi"><small><span data-i18n="metal.palladium"></span> · EUR/oz</small><strong data-kpi="pallOz">—</strong><span class="kpi__sub" data-kpi="pallOzUSD">—</span></div>
-          <div class="kpi"><small data-i18n="dash.ratio"></small><strong data-kpi="ratio">—</strong><span class="kpi__sub">XAU / XAG</span></div>
-          <div class="kpi"><small data-i18n="dash.eurusd"></small><strong data-kpi="eurusd">—</strong><span class="kpi__sub" data-kpi="eurusdDate">—</span></div>
-        </div>
-
-        <div class="card live">
-          <div class="card__head">
-            <h3 data-i18n="dash.liveTitle"></h3>
-            <span class="pill is-live"><i></i><b data-i18n="dash.liveTick"></b></span>
-          </div>
-          <div class="live__quotes" id="tvQuotes"></div>
-        </div>
-
-        <div class="dash">
-          <div class="card dash__chart">
-            <div class="card__head">
-              <h3 data-i18n="dash.chartTitle"></h3>
-              <div class="tabs" id="tvTabs" role="tablist">
-                <button type="button" class="is-active" data-symbol="OANDA:XAUUSD">XAU/USD</button>
-                <button type="button" data-symbol="OANDA:XAUEUR">XAU/EUR</button>
-                <button type="button" data-symbol="OANDA:XAGUSD">XAG/USD</button>
-                <button type="button" data-symbol="OANDA:XAGEUR">XAG/EUR</button>
-                <button type="button" data-symbol="OANDA:XPTUSD">XPT/USD</button>
-              </div>
-            </div>
-            <div class="tv" id="tvChart"></div>
-          </div>
-
-          <div class="dash__side">
-            <div class="card">
-              <div class="card__head">
-                <h3 data-i18n="dash.tableTitle"></h3>
-                <span class="ratio-pill"><span data-i18n="dash.ratio"></span> <b data-kpi="ratio2">—</b></span>
-              </div>
-              <div class="table-wrap">
-                <table class="table" id="weightTable">
-                  <thead><tr><th data-i18n="dash.weight"></th><th><span data-i18n="metal.gold"></span> €</th><th><span data-i18n="metal.silver"></span> €</th></tr></thead>
-                  <tbody></tbody>
-                </table>
-              </div>
-              <p class="muted small" data-i18n="dash.tableNote"></p>
-            </div>
-          </div>
-        </div>
-        <p class="muted small source"><span data-i18n="dash.source"></span> <span id="lastUpdate"></span></p>
       </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section class="section section--alt" id="products">
+    <!-- QUICK LINKS -->
+    <section class="section">
       <div class="container">
         <div class="section__head">
-          <p class="eyebrow" data-i18n="prod.eyebrow"></p>
-          <h2 data-i18n="prod.title"></h2>
-          <p class="lead" data-i18n="prod.lead"></p>
+          <p class="eyebrow" data-i18n="home.eyebrow"></p>
+          <h2 data-i18n="home.title"></h2>
         </div>
-        <div class="filters">
-          <div class="tabs tabs--lg" id="catTabs" role="tablist">
-            <button type="button" class="is-active" data-cat="goldBars" data-i18n="prod.goldBars"></button>
-            <button type="button" data-cat="goldCoins" data-i18n="prod.goldCoins"></button>
-            <button type="button" data-cat="silverBars" data-i18n="prod.silverBars"></button>
-            <button type="button" data-cat="silverCoins" data-i18n="prod.silverCoins"></button>
-          </div>
-          <label class="select">
-            <select id="brandFilter" aria-label="Brand">
-              <option value="" data-i18n="prod.allBrands"></option>
-              <option value="Argor-Heraeus">Argor-Heraeus</option>
-              <option value="PAMP">PAMP Suisse</option>
-              <option value="Valcambi">Valcambi Suisse</option>
-            </select>
-          </label>
-        </div>
-        <div class="products" id="productGrid"></div>
-      </div>
-    </section>
-
-    <!-- BRANDS -->
-    <section class="section" id="brands">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow" data-i18n="brands.eyebrow"></p>
-          <h2 data-i18n="brands.title"></h2>
-          <p class="lead" data-i18n="brands.lead"></p>
-        </div>
-        <div class="brands">
-          <article class="brand">
-            <div class="brand__mark brand__mark--argor"><span>ARGOR</span><b>AH</b><span>HERAEUS SA</span></div>
-            <h3>Argor-Heraeus SA</h3>
-            <p data-i18n="brands.argor"></p>
-          </article>
-          <article class="brand">
-            <div class="brand__mark brand__mark--pamp"><b>PAMP</b><span>Produits Artistiques Métaux Précieux</span></div>
-            <h3>PAMP Suisse</h3>
-            <p data-i18n="brands.pamp"></p>
-          </article>
-          <article class="brand">
-            <div class="brand__mark brand__mark--valcambi"><b>valcambi</b><span>suisse</span></div>
-            <h3>Valcambi Suisse</h3>
-            <p data-i18n="brands.valcambi"></p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- CALCULATOR -->
-    <section class="section section--alt" id="calculator">
-      <div class="container calc">
-        <div class="calc__intro">
-          <p class="eyebrow" data-i18n="calc.eyebrow"></p>
-          <h2 data-i18n="calc.title"></h2>
-          <p class="muted" data-i18n="calc.note"></p>
-        </div>
-        <form class="card calc__form" id="calcForm" onsubmit="return false">
-          <div class="field">
-            <span data-i18n="calc.metal"></span>
-            <div class="seg" id="calcMetal">
-              <button type="button" class="is-active" data-metal="XAU" data-i18n="metal.gold"></button>
-              <button type="button" data-metal="XAG" data-i18n="metal.silver"></button>
-            </div>
-          </div>
-          <div class="field-row">
-            <label class="field"><span data-i18n="calc.weight"></span>
-              <select id="calcWeight"></select>
-            </label>
-            <label class="field"><span data-i18n="calc.qty"></span>
-              <input id="calcQty" type="number" min="1" max="10000" value="1" inputmode="numeric">
-            </label>
-            <label class="field"><span data-i18n="calc.currency"></span>
-              <select id="calcCur"><option>EUR</option><option>USD</option><option>TRY</option><option>GBP</option><option>CHF</option></select>
-            </label>
-          </div>
-          <div class="calc__result">
-            <small data-i18n="calc.result"></small>
-            <strong id="calcTotal">—</strong>
-            <span class="muted" id="calcUnit"></span>
-          </div>
-          <a class="btn btn--gold btn--block" id="calcCta" href="#contact" data-i18n="calc.cta"></a>
-        </form>
-      </div>
-    </section>
-
-    <!-- FX -->
-    <section class="section" id="fx">
-      <div class="container">
-        <div class="section__head">
-          <p class="eyebrow" data-i18n="fx.eyebrow"></p>
-          <h2 data-i18n="fx.title"></h2>
-          <p class="lead" data-i18n="fx.lead"></p>
-        </div>
-        <div class="fx">
-          <div class="fx__left">
-            <div class="card">
-              <div class="card__head"><h3 data-i18n="fx.converter"></h3></div>
-              <div class="conv">
-                <label class="field"><span data-i18n="fx.amount"></span><input id="convAmount" type="number" min="0" step="any" value="1000" inputmode="decimal"></label>
-                <div class="conv__pair">
-                  <label class="field"><span data-i18n="fx.from"></span><select id="convFrom"></select></label>
-                  <button type="button" class="conv__swap" id="convSwap" data-i18n-attr="aria-label:fx.swap" aria-label="Swap">⇄</button>
-                  <label class="field"><span data-i18n="fx.to"></span><select id="convTo"></select></label>
-                </div>
-                <div class="conv__out"><strong id="convOut">—</strong><small id="convRate" class="muted"></small></div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card__head">
-                <h3 data-i18n="fx.history"></h3>
-                <div class="fx__pick">
-                  <span class="mono">EUR/</span><select id="histCur" aria-label="Currency"></select>
-                  <div class="tabs tabs--sm" id="histRange">
-                    <button type="button" data-days="30">1M</button>
-                    <button type="button" data-days="90">3M</button>
-                    <button type="button" class="is-active" data-days="365">1Y</button>
-                    <button type="button" data-days="1825">5Y</button>
-                  </div>
-                </div>
-              </div>
-              <div class="chart chart--fx" id="fxChart"></div>
-            </div>
-          </div>
-          <div class="card fx__table">
-            <div class="card__head"><h3 data-i18n="fx.table"></h3><span class="muted small mono" id="fxDate"></span></div>
-            <div class="table-wrap">
-              <table class="table table--fx" id="fxTable">
-                <thead><tr><th data-i18n="fx.currency"></th><th class="num" data-i18n="fx.rate"></th><th class="num" data-i18n="fx.inverse"></th><th class="num" data-i18n="fx.change"></th></tr></thead>
-                <tbody></tbody>
-              </table>
-            </div>
-            <p class="muted small" data-i18n="fx.note"></p>
-            <a href="#contact" class="btn btn--ghost btn--block" data-interest="fx" data-i18n="fx.cta"></a>
-          </div>
+        <div class="tiles">
+          <a class="tile" href="markets.html"><span class="tile__ico"><svg class="ico" viewBox="0 0 24 24"><path d="M3 20h18v2H3zM5 10h3v8H5zm5.5-5h3v13h-3zM16 13h3v5h-3z"/></svg></span><h3 data-i18n="nav.dashboard"></h3><p data-i18n="home.markets"></p><span class="tile__go">→</span></a>
+          <a class="tile" href="products.html"><span class="tile__ico"><svg class="ico" viewBox="0 0 24 24"><path d="M4 15h7l1.5 5h-10zm8.5 0h7l1.5 5h-7zM8 8h8l1.5 5h-11z"/></svg></span><h3 data-i18n="nav.products"></h3><p data-i18n="home.products"></p><span class="tile__go">→</span></a>
+          <a class="tile" href="calculator.html"><span class="tile__ico"><svg class="ico" viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm1 3v4h10V5zm0 7v2h2v-2zm4 0v2h2v-2zm4 0v6h2v-6zm-8 4v2h2v-2zm4 0v2h2v-2z"/></svg></span><h3 data-i18n="nav.calculator"></h3><p data-i18n="home.calc"></p><span class="tile__go">→</span></a>
+          <a class="tile" href="fx.html"><span class="tile__ico"><svg class="ico" viewBox="0 0 24 24"><path d="M7 7h11l-3-3 1.4-1.4L21.8 8l-5.4 5.4L15 12l3-3H7zm10 10H6l3 3-1.4 1.4L2.2 16l5.4-5.4L9 12l-3 3h11z"/></svg></span><h3 data-i18n="nav.fx"></h3><p data-i18n="home.fx"></p><span class="tile__go">→</span></a>
         </div>
       </div>
     </section>
@@ -338,61 +153,19 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section class="section" id="about">
-      <div class="container about">
-        <div class="about__copy">
-          <p class="eyebrow" data-i18n="about.eyebrow"></p>
-          <h2 data-i18n="about.title"></h2>
-          <p data-i18n="about.p1"></p>
-          <p data-i18n="about.p2"></p>
-          <p data-i18n="about.p3"></p>
-        </div>
-        <div class="stats">
-          <div class="stat"><strong>1990</strong><span data-i18n="about.stat1"></span></div>
-          <div class="stat"><strong data-years>35+</strong><span data-i18n="about.stat2"></span></div>
-          <div class="stat"><strong>3</strong><span data-i18n="about.stat3"></span></div>
-          <div class="stat"><strong>4</strong><span data-i18n="about.stat4"></span></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section section--alt" id="contact">
-      <div class="container contact">
-        <div class="contact__info">
-          <p class="eyebrow" data-i18n="contact.eyebrow"></p>
-          <h2 data-i18n="contact.title"></h2>
-          <p class="lead" data-i18n="contact.lead"></p>
-          <ul class="contact__list">
-            <li><svg class="ico" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-              <div><small data-i18n="contact.phone"></small><a href="tel:+359888272619">+359 888 272 619</a></div></li>
-            <li><svg class="ico" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm0 3.3V18h16V7.3l-8 5.2z"/></svg>
-              <div><small data-i18n="contact.email"></small><a href="mailto:info@gbgold.bg">info@gbgold.bg</a></div></li>
-            <li><svg class="ico" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-              <div><small data-i18n="contact.address"></small><span data-i18n="contact.addressVal"></span>
-              <a class="link" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%D1%83%D0%BB.+%D0%93%D0%B5%D0%BE%D1%80%D0%B3%D0%B8+%D0%9A%D0%BE%D0%BD%D0%B4%D0%BE%D0%BB%D0%BE%D0%B2+18+%D0%9A%D1%8A%D1%80%D0%B4%D0%B6%D0%B0%D0%BB%D0%B8" data-i18n="contact.map"></a></div></li>
-          </ul>
-          <a href="tel:+359888272619" class="btn btn--gold" data-i18n="cta.call"></a>
-        </div>
-        <form class="card contact__form" id="contactForm">
-          <h3 data-i18n="contact.formTitle"></h3>
-          <div class="field-row">
-            <label class="field"><span data-i18n="contact.name"></span><input name="name" required autocomplete="name"></label>
-            <label class="field"><span data-i18n="contact.tel"></span><input name="phone" type="tel" required autocomplete="tel"></label>
+    <!-- CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="cta-band">
+          <div>
+            <h2 data-i18n="home.ctaTitle"></h2>
+            <p class="muted" data-i18n="home.ctaText"></p>
           </div>
-          <label class="field"><span data-i18n="contact.interest"></span>
-            <select name="interest" id="interest">
-              <option value="gold" data-i18n="contact.optGold"></option>
-              <option value="silver" data-i18n="contact.optSilver"></option>
-              <option value="fx" data-i18n="contact.optFx"></option>
-              <option value="other" data-i18n="contact.optOther"></option>
-            </select>
-          </label>
-          <label class="field"><span data-i18n="contact.message"></span><textarea name="message" rows="4" id="message"></textarea></label>
-          <button class="btn btn--gold btn--block" type="submit" data-i18n="contact.send"></button>
-          <p class="muted small" data-i18n="contact.formNote"></p>
-        </form>
+          <div class="cta-band__btns">
+            <a href="tel:+359888272619" class="btn btn--gold" data-i18n="cta.call"></a>
+            <a href="contact.html" class="btn btn--ghost" data-i18n="cta.contact"></a>
+          </div>
+        </div>
       </div>
     </section>
   </main>
@@ -400,7 +173,7 @@
   <footer class="footer">
     <div class="container footer__grid">
       <div>
-        <a href="#top" class="logo"><span class="logo__text">GB<b>GOLD</b><small>.BG</small></span></a>
+        <a href="index.html" class="logo"><span class="logo__text">GB<b>GOLD</b><small>.BG</small></span></a>
         <p class="muted" data-i18n="footer.tagline"></p>
       </div>
       <div>
@@ -410,15 +183,17 @@
       <div>
         <h4 data-i18n="footer.links"></h4>
         <ul class="footer__links">
-          <li><a href="#markets" data-i18n="nav.dashboard"></a></li>
-          <li><a href="#products" data-i18n="nav.products"></a></li>
-          <li><a href="#fx" data-i18n="nav.fx"></a></li>
-          <li><a href="#contact" data-i18n="nav.contact"></a></li>
+          <li><a href="markets.html" data-i18n="nav.dashboard"></a></li>
+          <li><a href="products.html" data-i18n="nav.products"></a></li>
+          <li><a href="calculator.html" data-i18n="nav.calculator"></a></li>
+          <li><a href="fx.html" data-i18n="nav.fx"></a></li>
+          <li><a href="about.html" data-i18n="nav.about"></a></li>
+          <li><a href="contact.html" data-i18n="nav.contact"></a></li>
         </ul>
       </div>
       <div>
         <h4 data-i18n="footer.legal"></h4>
-        <ul class="footer__links"><li><a href="terms.html" data-keep-lang data-i18n="footer.terms"></a></li></ul>
+        <ul class="footer__links"><li><a href="terms.html" data-i18n="footer.terms"></a></li></ul>
       </div>
     </div>
     <div class="container footer__bottom">
@@ -427,12 +202,17 @@
     </div>
   </footer>
 
-  <a href="tel:+359888272619" class="fab" aria-label="Call">
-    <svg class="ico" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
-  </a>
+  <!-- Mobile bottom navigation -->
+  <nav class="tabbar" aria-label="Mobile">
+    <a href="index.html" data-nav="home"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3 2 11h3v9h5v-6h4v6h5v-9h3z"/></svg><span data-i18n="nav.home">Начало</span></a>
+    <a href="markets.html" data-nav="markets"><svg class="ico" viewBox="0 0 24 24"><path d="M3 20h18v2H3zM5 10h3v8H5zm5.5-5h3v13h-3zM16 13h3v5h-3z"/></svg><span data-i18n="nav.dashboard">Пазари</span></a>
+    <a href="tel:+359888272619" class="tabbar__call" aria-label="Call"><svg class="ico" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg></a>
+    <a href="products.html" data-nav="products"><svg class="ico" viewBox="0 0 24 24"><path d="M4 15h7l1.5 5h-10zm8.5 0h7l1.5 5h-7zM8 8h8l1.5 5h-11z"/></svg><span data-i18n="nav.products">Продукти</span></a>
+    <a href="fx.html" data-nav="fx"><svg class="ico" viewBox="0 0 24 24"><path d="M7 7h11l-3-3 1.4-1.4L21.8 8l-5.4 5.4L15 12l3-3H7zm10 10H6l3 3-1.4 1.4L2.2 16l5.4-5.4L9 12l-3 3h11z"/></svg><span data-i18n="nav.fx">Валута</span></a>
+  </nav>
 
-  <script src="assets/js/i18n.js?v=20261030e"></script>
-  <script src="assets/js/charts.js?v=20261030e"></script>
-  <script src="assets/js/app.js?v=20261030e"></script>
+  <script src="assets/js/i18n.js?v=20261030f"></script>
+  <script src="assets/js/charts.js?v=20261030f"></script>
+  <script src="assets/js/app.js?v=20261030f"></script>
 </body>
 </html>

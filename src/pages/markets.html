@@ -1,0 +1,63 @@
+<!-- title: title.markets | canonical: markets.html -->
+    <!-- DASHBOARD -->
+    <section class="section section--first" id="markets">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-i18n="dash.eyebrow"></p>
+          <h2 data-i18n="dash.title"></h2>
+          <p class="lead" data-i18n="dash.lead"></p>
+        </div>
+
+        <div class="tv-slot kpis-live" id="tvTickers"></div>
+        <div class="kpis tv-fallback" id="kpis">
+          <div class="kpi"><small><span data-i18n="metal.gold"></span> · EUR/oz</small><strong data-kpi="goldOz">—</strong><span class="kpi__sub" data-kpi="goldOzUSD">—</span></div>
+          <div class="kpi"><small><span data-i18n="metal.silver"></span> · EUR/oz</small><strong data-kpi="silverOz">—</strong><span class="kpi__sub" data-kpi="silverOzUSD">—</span></div>
+          <div class="kpi"><small><span data-i18n="metal.platinum"></span> · EUR/oz</small><strong data-kpi="platOz">—</strong><span class="kpi__sub" data-kpi="platOzUSD">—</span></div>
+          <div class="kpi"><small><span data-i18n="metal.palladium"></span> · EUR/oz</small><strong data-kpi="pallOz">—</strong><span class="kpi__sub" data-kpi="pallOzUSD">—</span></div>
+          <div class="kpi"><small data-i18n="dash.ratio"></small><strong data-kpi="ratio">—</strong><span class="kpi__sub">XAU / XAG</span></div>
+          <div class="kpi"><small data-i18n="dash.eurusd"></small><strong data-kpi="eurusd">—</strong><span class="kpi__sub" data-kpi="eurusdDate">—</span></div>
+        </div>
+
+        <div class="card live">
+          <div class="card__head">
+            <h3 data-i18n="dash.liveTitle"></h3>
+            <span class="pill is-live"><i></i><b data-i18n="dash.liveTick"></b></span>
+          </div>
+          <div class="live__quotes" id="tvQuotes"></div>
+        </div>
+
+        <div class="dash">
+          <div class="card dash__chart">
+            <div class="card__head">
+              <h3 data-i18n="dash.chartTitle"></h3>
+              <div class="tabs" id="tvTabs" role="tablist">
+                <button type="button" class="is-active" data-symbol="OANDA:XAUUSD">XAU/USD</button>
+                <button type="button" data-symbol="OANDA:XAUEUR">XAU/EUR</button>
+                <button type="button" data-symbol="OANDA:XAGUSD">XAG/USD</button>
+                <button type="button" data-symbol="OANDA:XAGEUR">XAG/EUR</button>
+                <button type="button" data-symbol="OANDA:XPTUSD">XPT/USD</button>
+              </div>
+            </div>
+            <div class="tv" id="tvChart"></div>
+          </div>
+
+          <div class="dash__side">
+            <div class="card">
+              <div class="card__head">
+                <h3 data-i18n="dash.tableTitle"></h3>
+                <span class="ratio-pill"><span data-i18n="dash.ratio"></span> <b data-kpi="ratio2">—</b></span>
+              </div>
+              <div class="table-wrap">
+                <table class="table" id="weightTable">
+                  <thead><tr><th data-i18n="dash.weight"></th><th><span data-i18n="metal.gold"></span> €</th><th><span data-i18n="metal.silver"></span> €</th></tr></thead>
+                  <tbody></tbody>
+                </table>
+              </div>
+              <p class="muted small" data-i18n="dash.tableNote"></p>
+            </div>
+          </div>
+        </div>
+        <p class="muted small source"><span data-i18n="dash.source"></span> <span id="lastUpdate"></span></p>
+      </div>
+    </section>
+

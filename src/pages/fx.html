@@ -1,0 +1,54 @@
+<!-- title: title.fx | canonical: fx.html -->
+    <!-- FX -->
+    <section class="section section--first" id="fx">
+      <div class="container">
+        <div class="section__head">
+          <p class="eyebrow" data-i18n="fx.eyebrow"></p>
+          <h2 data-i18n="fx.title"></h2>
+          <p class="lead" data-i18n="fx.lead"></p>
+        </div>
+        <div class="fx">
+          <div class="fx__left">
+            <div class="card">
+              <div class="card__head"><h3 data-i18n="fx.converter"></h3></div>
+              <div class="conv">
+                <label class="field"><span data-i18n="fx.amount"></span><input id="convAmount" type="number" min="0" step="any" value="1000" inputmode="decimal"></label>
+                <div class="conv__pair">
+                  <label class="field"><span data-i18n="fx.from"></span><select id="convFrom"></select></label>
+                  <button type="button" class="conv__swap" id="convSwap" data-i18n-attr="aria-label:fx.swap" aria-label="Swap">⇄</button>
+                  <label class="field"><span data-i18n="fx.to"></span><select id="convTo"></select></label>
+                </div>
+                <div class="conv__out"><strong id="convOut">—</strong><small id="convRate" class="muted"></small></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card__head">
+                <h3 data-i18n="fx.history"></h3>
+                <div class="fx__pick">
+                  <span class="mono">EUR/</span><select id="histCur" aria-label="Currency"></select>
+                  <div class="tabs tabs--sm" id="histRange">
+                    <button type="button" data-days="30">1M</button>
+                    <button type="button" data-days="90">3M</button>
+                    <button type="button" class="is-active" data-days="365">1Y</button>
+                    <button type="button" data-days="1825">5Y</button>
+                  </div>
+                </div>
+              </div>
+              <div class="chart chart--fx" id="fxChart"></div>
+            </div>
+          </div>
+          <div class="card fx__table">
+            <div class="card__head"><h3 data-i18n="fx.table"></h3><span class="muted small mono" id="fxDate"></span></div>
+            <div class="table-wrap">
+              <table class="table table--fx" id="fxTable">
+                <thead><tr><th data-i18n="fx.currency"></th><th class="num" data-i18n="fx.rate"></th><th class="num" data-i18n="fx.inverse"></th><th class="num" data-i18n="fx.change"></th></tr></thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <p class="muted small" data-i18n="fx.note"></p>
+            <a href="contact.html?i=fx" class="btn btn--ghost btn--block" data-i18n="fx.cta"></a>
+          </div>
+        </div>
+      </div>
+    </section>
+

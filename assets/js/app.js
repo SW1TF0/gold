@@ -59,7 +59,13 @@
         n.setAttribute(attr, T(key));
       });
     });
-    document.title = T("meta.title");
+    $$("[data-lang-block]").forEach((a) => a.classList.toggle("is-shown", a.dataset.langBlock === state.lang));
+    const page = document.body.dataset.page;
+    $$("[data-nav]").forEach((a) => {
+      const on = a.dataset.nav === page;
+      a.classList.toggle("is-active", on);
+      if (on) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
+    });
     $$("[data-lang]").forEach((b) => b.classList.toggle("is-active", b.dataset.lang === state.lang));
     $$("a[data-keep-lang]").forEach((a) => { a.href = a.getAttribute("href").split("?")[0] + "?lang=" + state.lang; });
   }
@@ -227,6 +233,7 @@
   const WEIGHTS = [1, 2.5, 5, 10, 20, OZ, 50, 100, 250, 500, 1000];
   function renderWeightTable() {
     const tb = $("#weightTable tbody");
+    if (!tb) return;
     const gg = gramIn("XAU", "EUR"), sg = gramIn("XAG", "EUR");
     tb.innerHTML = WEIGHTS.map((w) => `<tr><td>${fmtWeight(w)}</td><td class="num">${money(gg != null ? gg * w * 0.9999 : null, "EUR", w >= 100 ? 0 : 2)}</td><td class="num">${money(sg != null ? sg * w * 0.999 : null, "EUR", 2)}</td></tr>`).join("");
   }
@@ -246,8 +253,6 @@
     const sc = document.createElement("script");
     sc.src = TV_BASE + name + ".js";
     sc.async = true;
-    host.classList.remove("tv-off");
-    sc.onerror = () => host.classList.add("tv-off");
     host.classList.remove("tv-off");
     sc.onerror = () => host.classList.add("tv-off");
     sc.textContent = JSON.stringify(Object.assign({ colorTheme: "dark", theme: "dark", isTransparent: false, backgroundColor: "#16130f", locale: tvLocale() }, config));
@@ -403,6 +408,7 @@
 
   function renderProducts(valuesOnly) {
     const grid = $("#productGrid");
+    if (!grid) return;
     if (valuesOnly && grid.children.length) {
       const stamp = spotStamp();
       $$("[data-pv]", grid).forEach((n) => {
@@ -432,10 +438,16 @@
           <div class="product__value"><small>${T("prod.metalValue")} <span class="live-dot${state.metalsOk ? " is-on" : ""}"></span></small><strong data-pv="${p.id}" data-v="${productValue(p) ?? ""}">${money(productValue(p), "EUR")}</strong><em>${T("prod.spotLive")} <span data-pt>${spotStamp()}</span> · ${T("prod.priceNote")}</em></div>
           <div class="product__cta">
             <a class="btn btn--gold btn--sm" href="tel:${PHONE}">${T("cta.ask")}</a>
-            <a class="btn btn--ghost btn--sm" href="#contact" data-product="${p.id}">${T("cta.email")}</a>
+            <a class="btn btn--ghost btn--sm" href="${contactHref(p.metal === "XAU" ? "gold" : "silver", productLabel(p))}">${T("cta.email")}</a>
           </div>
         </div>
       </article>`).join("");
+  }
+
+  function contactHref(interest, message) {
+    const q = new URLSearchParams({ i: interest });
+    if (message) q.set("m", message);
+    return "contact.html?" + q;
   }
 
   function productLabel(p) { return `${p.name}${p.combi ? "" : " " + fmtWeight(p.g)} (${p.fine})`; }
@@ -444,18 +456,21 @@
   const CALC_WEIGHTS = { XAU: [1, 2.5, 5, 10, 20, OZ, 50, 100, 250, 500, 1000], XAG: [OZ, 100, 250, 500, 1000, 5000] };
   function fillCalcWeights() {
     const sel = $("#calcWeight");
+    if (!sel) return;
     const keep = sel.value;
     sel.innerHTML = CALC_WEIGHTS[state.calcMetal].map((w) => `<option value="${w}">${fmtWeight(w)}</option>`).join("");
     if ([...sel.options].some((o) => o.value === keep)) sel.value = keep;
     else sel.value = String(state.calcMetal === "XAU" ? OZ : 1000);
   }
   function renderCalc() {
+    if (!$("#calcTotal")) return;
     const w = +$("#calcWeight").value, q = Math.max(1, Math.floor(+$("#calcQty").value || 1)), cur = $("#calcCur").value;
     const gp = gramIn(state.calcMetal, cur);
     const fine = state.calcMetal === "XAU" ? 0.9999 : 0.999;
     const unit = gp == null ? null : gp * w * fine;
     $("#calcTotal").textContent = money(unit == null ? null : unit * q, cur);
     $("#calcUnit").textContent = unit == null ? "" : `${money(unit, cur)} ${T("calc.perUnit")} · ${fmtWeight(w)} · ${fine * 1000}`;
+    $("#calcCta").href = contactHref(state.calcMetal === "XAU" ? "gold" : "silver", `${q} × ${T(state.calcMetal === "XAU" ? "metal.gold" : "metal.silver")} ${fmtWeight(w)} — ${$("#calcTotal").textContent}`);
   }
 
   // ---------- FX ----------
@@ -482,6 +497,7 @@
   }
 
   function renderFx() {
+    if (!$("#fxTable")) return;
     fillFxSelects();
     renderConverter();
     const tb = $("#fxTable tbody");
@@ -498,6 +514,7 @@
   const histCache = {};
   async function renderFxHistory() {
     const host = $("#fxChart");
+    if (!host) return;
     const c = state.histCur, d = state.histDays;
     const key = c + d;
     const draw = (pts) => GBCharts.areaChart(host, pts, {
@@ -520,14 +537,15 @@
   }
 
   // ---------- contact ----------
-  function prefillContact(interest, message) {
-    const sel = $("#interest");
-    if (interest) sel.value = interest;
-    if (message != null) $("#message").value = message;
-  }
-
   function bindContact() {
-    $("#contactForm").addEventListener("submit", (e) => {
+    const form = $("#contactForm");
+    if (!form) return;
+    // product / calculator / FX buttons on other pages pass ?i=interest&m=message
+    const q = new URLSearchParams(location.search);
+    const sel = $("#interest");
+    if ([...sel.options].some((o) => o.value === q.get("i"))) sel.value = q.get("i");
+    if (q.get("m")) $("#message").value = q.get("m");
+    form.addEventListener("submit", (e) => {
       e.preventDefault();
       const f = e.target;
       const interest = f.interest.options[f.interest.selectedIndex].text;
@@ -544,15 +562,18 @@
 
   // ---------- events ----------
   function bind() {
+    const on = (sel, ev, fn) => { const n = $(sel); if (n) n.addEventListener(ev, fn); };
     $$("[data-lang]").forEach((b) => b.addEventListener("click", () => setLang(b.dataset.lang)));
 
-    const burger = $("#burger"), nav = $("#nav");
+    const burger = $("#burger");
+    const closeNav = () => { document.body.classList.remove("nav-open"); burger.setAttribute("aria-expanded", "false"); };
     burger.addEventListener("click", () => {
       const open = !document.body.classList.contains("nav-open");
       document.body.classList.toggle("nav-open", open);
       burger.setAttribute("aria-expanded", open);
     });
-    $$("a", nav).forEach((a) => a.addEventListener("click", () => { document.body.classList.remove("nav-open"); burger.setAttribute("aria-expanded", "false"); }));
+    $$("#nav a").forEach((a) => a.addEventListener("click", closeNav));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeNav(); });
 
     const header = $("#header");
     const onScroll = () => header.classList.toggle("is-scrolled", scrollY > 40);
@@ -571,33 +592,23 @@
       state.calcMetal = b.dataset.metal; fillCalcWeights(); renderCalc();
     }));
 
-    $("#brandFilter").addEventListener("change", (e) => { state.brand = e.target.value; renderProducts(); });
-    ["#calcWeight", "#calcQty", "#calcCur"].forEach((s) => $(s).addEventListener("input", renderCalc));
-    ["#convAmount", "#convFrom", "#convTo"].forEach((s) => $(s).addEventListener("input", renderConverter));
-    $("#convSwap").addEventListener("click", () => {
+    on("#brandFilter", "change", (e) => { state.brand = e.target.value; renderProducts(); });
+    ["#calcWeight", "#calcQty", "#calcCur"].forEach((s) => on(s, "input", renderCalc));
+    ["#convAmount", "#convFrom", "#convTo"].forEach((s) => on(s, "input", renderConverter));
+    on("#convSwap", "click", () => {
       const f = $("#convFrom"), t = $("#convTo"); const v = f.value; f.value = t.value; t.value = v; renderConverter();
     });
-    $("#histCur").addEventListener("change", (e) => { state.histCur = e.target.value; renderFx(); renderFxHistory(); });
-    $("#fxTable").addEventListener("click", (e) => {
+    on("#histCur", "change", (e) => { state.histCur = e.target.value; renderFx(); renderFxHistory(); });
+    on("#fxTable", "click", (e) => {
       const tr = e.target.closest("tr[data-cur]");
       if (!tr) return;
       state.histCur = tr.dataset.cur; renderFx(); renderFxHistory();
     });
 
-    // "Inquire" buttons prefill the contact form
-    document.addEventListener("click", (e) => {
-      const a = e.target.closest("[data-product]");
-      if (a) { const p = PRODUCTS[+a.dataset.product]; prefillContact(p.metal === "XAU" ? "gold" : "silver", productLabel(p)); return; }
-      const fx = e.target.closest("[data-interest]");
-      if (fx) prefillContact(fx.dataset.interest, null);
-    });
-    $("#calcCta").addEventListener("click", () => {
-      const w = +$("#calcWeight").value, q = $("#calcQty").value;
-      prefillContact(state.calcMetal === "XAU" ? "gold" : "silver", `${q} × ${T(state.calcMetal === "XAU" ? "metal.gold" : "metal.silver")} ${fmtWeight(w)} — ${$("#calcTotal").textContent}`);
-    });
-
-    let rt;
-    addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderFxHistory, 200); });
+    if ($("#fxChart")) {
+      let rt;
+      addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(renderFxHistory, 200); });
+    }
     document.addEventListener("visibilitychange", () => { if (!document.hidden) loadMetals(); });
   }
 

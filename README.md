@@ -2,7 +2,17 @@
 
 Website of „Голдънбрадърс Груп“ ООД — investment gold and silver and currency exchange, Kardzhali, Bulgaria.
 
-A static site (HTML, CSS, vanilla JS, no build step) in Bulgarian, English and Turkish.
+A static site (HTML, CSS, vanilla JS) in Bulgarian, English and Turkish. Every menu item is its own page; on phones a bottom tab bar with a call button replaces the top menu.
+
+## Pages
+
+`index.html` (home), `markets.html`, `products.html`, `calculator.html`, `fx.html`, `about.html`, `contact.html`, `terms.html`.
+
+The root `.html` files are generated. Edit `src/layout.html` (shared header, footer, mobile tab bar) or `src/pages/*.html` (page content), then run:
+
+```sh
+python3 tools/build.py 20261030f   # the argument is the asset version for ?v=
+```
 
 ## Sections
 
@@ -39,6 +49,7 @@ Upload the repository contents to any static host (GitHub Pages, Netlify, Cloudf
 
 - Text in all three languages: `assets/js/i18n.js`
 - Product catalogue: `PRODUCTS` in `assets/js/app.js`
-- Contact details: `index.html` (header, contact section, footer) and `PHONE` / `EMAIL` in `assets/js/app.js`
+- Contact details: `src/layout.html` (header, footer), `src/pages/contact.html` and `PHONE` / `EMAIL` in `assets/js/app.js`
+- Product, calculator and FX buttons link to `contact.html?i=gold|silver|fx&m=<message>`, which prefills the contact form.
 
-After changing any CSS/JS file, bump the `?v=` number on its `<link>`/`<script>` tags in `index.html` and `terms.html` so visitors do not keep an old cached copy.
+After changing any CSS/JS file, rebuild with a new version (`python3 tools/build.py <new-version>`) and update the default in `tools/build.py`, so visitors do not keep an old cached copy.
