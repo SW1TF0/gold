@@ -281,7 +281,7 @@
     sc.async = true;
     host.classList.remove("tv-off");
     sc.onerror = () => host.classList.add("tv-off");
-    sc.textContent = JSON.stringify(Object.assign({ colorTheme: "dark", isTransparent: true, locale: tvLocale() }, config));
+    sc.textContent = JSON.stringify(Object.assign({ colorTheme: "dark", theme: "dark", isTransparent: false, backgroundColor: "#16130f", locale: tvLocale() }, config));
     wrap.appendChild(sc);
     host.appendChild(wrap);
   }
@@ -300,7 +300,7 @@
     });
     const q = (s, name) => ({ name: s, displayName: name });
     tvEmbed($("#tvQuotes"), "market-quotes", {
-      width: "100%", height: "100%", showSymbolLogo: false, backgroundColor: "rgba(0,0,0,0)",
+      width: "100%", height: "100%", showSymbolLogo: false,
       symbolsGroups: [
         { name: T("dash.groupMetals"), symbols: [
           q("OANDA:XAUEUR", T("metal.gold") + " · EUR/oz"), q("OANDA:XAUUSD", T("metal.gold") + " · USD/oz"),
